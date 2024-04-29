@@ -1,0 +1,35 @@
+#cloud-config
+autoinstall:
+  version: 1
+  early-commands:
+    - apt-get update
+  packages:
+    - wget
+    - dpkg
+    - git
+  snaps:
+    - name: pycharm-community
+      channel: stable
+      confinement: classic
+    - name: code
+      channel: stable
+      confinement: classic
+    - name: sublime-text
+      channel: stable
+      confinement: classic
+    - name: slack
+      channel: stable
+    - name: telegram-desktop
+      channel: stable
+  late-commands:
+    - wget -O /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - dpkg -i /tmp/google-chrome-stable_current_amd64.deb; apt-get install -yf
+    - rm /tmp/google-chrome-stable_current_amd64.deb
+    - echo "Installation Summary:" > /target/root/installation-summary.txt
+    - echo "Google Chrome: installed" >> /target/root/installation-summary.txt
+    - echo "Git: installed" >> /target/root/installation-summary.txt
+    - echo "Pycharm: installed" >> /target/root/installation-summary.txt
+    - echo "VS code: installed" >> /target/root/installation-summary.txt
+    - echo "Sublime Text: installed" >> /target/root/installation-summary.txt
+    - echo "Slack: installed" >> /target/root/installation-summary.txt
+    - echo "Telegram: installed" >> /target/root/installation-summary.txt
